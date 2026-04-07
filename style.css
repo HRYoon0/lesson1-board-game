@@ -173,6 +173,14 @@ body{font-family:var(--font-en);background:linear-gradient(-45deg,var(--bg-start
 .square.rollAgain{background:linear-gradient(145deg,var(--roll-from),var(--roll-to));animation:wobbleIdle 3s ease-in-out infinite}
 @keyframes wobbleIdle{0%,100%{transform:rotate(0)}25%{transform:rotate(1.5deg)}75%{transform:rotate(-1.5deg)}}
 .square.start{background:linear-gradient(145deg,var(--start-from),var(--start-to))}
+.square .sq-points{
+  position:absolute;top:3px;right:3px;
+  background:rgba(255,255,255,.85);color:#e17055;
+  font-family:var(--font-ko);font-size:.65rem;font-weight:700;
+  padding:1px 5px;border-radius:8px;
+  line-height:1.3;z-index:4;
+  box-shadow:0 1px 3px rgba(0,0,0,.12);
+}
 
 /* Tokens */
 .tokens{position:absolute;bottom:4px;right:4px;display:flex;gap:3px;flex-wrap:wrap;max-width:56px;justify-content:flex-end}
@@ -263,7 +271,8 @@ body{font-family:var(--font-en);background:linear-gradient(-45deg,var(--bg-start
 .player-card .p-dot{width:30px;height:30px;border-radius:50%;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.18)}
 .player-card .p-info{display:flex;flex-direction:column}
 .player-card .p-name{font-family:var(--font-ko);font-size:1.2rem;font-weight:600}
-.player-card .p-progress{font-size:1rem;color:#888;display:flex;align-items:center;gap:4px}
+.player-card .p-score{font-family:var(--font-ko);font-size:1.05rem;color:#e17055;font-weight:700}
+.player-card .p-progress{font-size:.9rem;color:#888;display:flex;align-items:center;gap:4px}
 .progress-bar{width:100px;height:10px;background:#eee;border-radius:5px;overflow:hidden;margin-top:4px;box-shadow:inset 0 1px 3px rgba(0,0,0,.08)}
 .progress-fill{height:100%;background:linear-gradient(90deg,#43E97B,#38f9d7);border-radius:5px;transition:width .5s cubic-bezier(.34,1.56,.64,1);position:relative}
 .progress-fill::after{
@@ -381,6 +390,25 @@ body{font-family:var(--font-en);background:linear-gradient(-45deg,var(--bg-start
   0%{transform:scale(0) translate(0,0);opacity:1}
   50%{transform:scale(1.2);opacity:.8}
   100%{transform:scale(0) translate(var(--tx),var(--ty));opacity:0}
+}
+
+/* ===== FLOATING SCORE ===== */
+.floating-score{
+  position:fixed;z-index:200;pointer-events:none;
+  font-family:var(--font-ko);font-size:1.6rem;font-weight:700;
+  color:#e17055;text-shadow:0 2px 4px rgba(0,0,0,.15);
+  transform:translateX(-50%);
+  animation:floatScoreUp 1.2s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.floating-score.bonus{
+  font-size:1.9rem;
+  color:#FFD700;
+  text-shadow:0 2px 6px rgba(255,215,0,.4);
+}
+@keyframes floatScoreUp{
+  0%{opacity:1;transform:translateX(-50%) translateY(0) scale(.5)}
+  30%{opacity:1;transform:translateX(-50%) translateY(-30px) scale(1.3)}
+  100%{opacity:0;transform:translateX(-50%) translateY(-80px) scale(1)}
 }
 
 /* ===== CONFETTI ===== */

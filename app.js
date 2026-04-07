@@ -1,25 +1,25 @@
 /* ========== CONSTANTS ========== */
 const BOARD = [
-  { id:0,  type:'start',     icon:'🚀', label:'출발',       sublabel:'START' },
-  { id:1,  type:'country',   icon:'🇰🇷', label:'Korea',     sentence:"I'm from Korea.",      sentenceIdx:0 },
-  { id:2,  type:'family',    icon:'👨', label:'Dad',       sublabel:'가족',  sentence:"This is my dad.",      sentenceIdx:6 },
-  { id:3,  type:'country',   icon:'🇺🇸', label:'U.S.',      sentence:"I'm from the U.S.",    sentenceIdx:1 },
-  { id:4,  type:'country',   icon:'🇫🇷', label:'France',    sentence:"I'm from France.",     sentenceIdx:5 },
-  { id:5,  type:'character', icon:'👦🏽', label:'Ken',       sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2 },
-  { id:6,  type:'family',    icon:'👩', label:'Mom',       sublabel:'가족',  sentence:"This is my mom.",      sentenceIdx:7 },
-  { id:7,  type:'country',   icon:'🇮🇳', label:'India',     sentence:"I'm from India.",      sentenceIdx:2 },
-  { id:8,  type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again' },
-  { id:9,  type:'country',   icon:'🇻🇳', label:'Vietnam',   sentence:"I'm from Vietnam.",    sentenceIdx:4 },
-  { id:10, type:'country',   icon:'🇺🇸', label:'U.S.',      sentence:"I'm from the U.S.",    sentenceIdx:1 },
-  { id:11, type:'family',    icon:'👦', label:'Brother',   sublabel:'가족',  sentence:"This is my brother.",  sentenceIdx:8 },
-  { id:12, type:'country',   icon:'🇨🇦', label:'Canada',    sentence:"I'm from Canada.",     sentenceIdx:3 },
-  { id:13, type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again' },
-  { id:14, type:'character', icon:'👦🏾', label:'Rahul',     sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2 },
-  { id:15, type:'country',   icon:'🇰🇷', label:'Korea',     sentence:"I'm from Korea.",      sentenceIdx:0 },
-  { id:16, type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again' },
-  { id:17, type:'character', icon:'👩🏻‍🏫', label:'Ms. Green', sublabel:'teacher', country:'the U.S.', sentence:"I'm from the U.S.", sentenceIdx:1 },
-  { id:18, type:'family',    icon:'👧', label:'Sister',    sublabel:'가족',  sentence:"This is my sister.",   sentenceIdx:9 },
-  { id:19, type:'character', icon:'👧🏻', label:'Marie',     sublabel:'cousin',  country:'France',  sentence:"I'm from France.",  sentenceIdx:5 },
+  { id:0,  type:'start',     icon:'🚀', label:'출발',       sublabel:'START',    points:0  },
+  { id:1,  type:'country',   icon:'🇰🇷', label:'Korea',     sentence:"I'm from Korea.",      sentenceIdx:0, points:10 },
+  { id:2,  type:'family',    icon:'👨', label:'Dad',       sublabel:'가족',  sentence:"This is my dad.",      sentenceIdx:6, points:15 },
+  { id:3,  type:'country',   icon:'🇺🇸', label:'U.S.',      sentence:"I'm from the U.S.",    sentenceIdx:1, points:10 },
+  { id:4,  type:'country',   icon:'🇫🇷', label:'France',    sentence:"I'm from France.",     sentenceIdx:5, points:10 },
+  { id:5,  type:'character', icon:'👦🏽', label:'Ken',       sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2, points:15 },
+  { id:6,  type:'family',    icon:'👩', label:'Mom',       sublabel:'가족',  sentence:"This is my mom.",      sentenceIdx:7, points:15 },
+  { id:7,  type:'country',   icon:'🇮🇳', label:'India',     sentence:"I'm from India.",      sentenceIdx:2, points:10 },
+  { id:8,  type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again',           points:5  },
+  { id:9,  type:'country',   icon:'🇻🇳', label:'Vietnam',   sentence:"I'm from Vietnam.",    sentenceIdx:4, points:10 },
+  { id:10, type:'country',   icon:'🇺🇸', label:'U.S.',      sentence:"I'm from the U.S.",    sentenceIdx:1, points:10 },
+  { id:11, type:'family',    icon:'👦', label:'Brother',   sublabel:'가족',  sentence:"This is my brother.",  sentenceIdx:8, points:15 },
+  { id:12, type:'country',   icon:'🇨🇦', label:'Canada',    sentence:"I'm from Canada.",     sentenceIdx:3, points:10 },
+  { id:13, type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again',           points:5  },
+  { id:14, type:'character', icon:'👦🏾', label:'Rahul',     sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2, points:15 },
+  { id:15, type:'country',   icon:'🇰🇷', label:'Korea',     sentence:"I'm from Korea.",      sentenceIdx:0, points:10 },
+  { id:16, type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again',           points:5  },
+  { id:17, type:'character', icon:'👩🏻‍🏫', label:'Ms. Green', sublabel:'teacher', country:'the U.S.', sentence:"I'm from the U.S.", sentenceIdx:1, points:15 },
+  { id:18, type:'family',    icon:'👧', label:'Sister',    sublabel:'가족',  sentence:"This is my sister.",   sentenceIdx:9, points:15 },
+  { id:19, type:'character', icon:'👧🏻', label:'Marie',     sublabel:'cousin',  country:'France',  sentence:"I'm from France.",  sentenceIdx:5, points:15 },
 ];
 
 const GRID_POS = [
@@ -124,6 +124,7 @@ function startGame(){
       name: inp.value.trim() || PNAMES_DEFAULT[i],
       color: PCOLORS[i],
       pos: 0,
+      score: 0,
       checked: new Set(),
       tokenEl: null
     });
@@ -154,6 +155,7 @@ function buildBoard(){
     div.innerHTML = `<span class="sq-icon">${sq.icon}</span>
       <span class="sq-label">${sq.label}</span>
       ${sq.sublabel ? `<span class="sq-sublabel">${sq.sublabel}</span>` : ''}
+      ${sq.points > 0 ? `<span class="sq-points">${sq.points}점</span>` : ''}
       <div class="tokens"></div>`;
     board.appendChild(div);
   });
@@ -215,6 +217,7 @@ function buildPlayersBar(){
     card.innerHTML = `<div class="p-dot" style="background:${p.color}"></div>
       <div class="p-info">
         <span class="p-name">${p.name}</span>
+        <span class="p-score">⭐ ${p.score}점</span>
         <span class="p-progress">${p.checked.size}/10</span>
         <div class="progress-bar"><div class="progress-fill" style="width:${(p.checked.size/10)*100}%"></div></div>
       </div>`;
@@ -227,6 +230,7 @@ function refreshBar(){
   players.forEach(p => {
     const card = $(`pcard-${p.idx}`);
     if(!card) return;
+    card.querySelector('.p-score').textContent = `⭐ ${p.score}점`;
     card.querySelector('.p-progress').textContent = `${p.checked.size}/10`;
     card.querySelector('.progress-fill').style.width = `${(p.checked.size/10)*100}%`;
   });
@@ -314,7 +318,17 @@ async function movePlayer(p, steps){
   /* sparkle on landing */
   const landedSq = board.querySelector(`.square[data-index="${p.pos}"]`);
   if(landedSq) createSparkles(landedSq);
-  await wait(200);
+  /* add points */
+  const sq = BOARD[p.pos];
+  if(sq.points > 0){
+    let earned = sq.points;
+    const isNew = sq.sentenceIdx !== undefined && !p.checked.has(sq.sentenceIdx);
+    if(isNew) earned += 10; /* new sentence bonus */
+    p.score += earned;
+    if(landedSq) showFloatingScore(landedSq, earned, isNew);
+    refreshBar();
+  }
+  await wait(300);
   handleLanding(p);
 }
 
@@ -378,7 +392,10 @@ function checkWin(p){
   if(p.checked.size >= 10){
     gameOver = true;
     $('win-title').textContent = '🎉 축하합니다!';
-    $('win-message').textContent = `${p.name}이(가) 모든 문장을 완성했어요!`;
+    /* Build score ranking */
+    const sorted = [...players].sort((a,b) => b.score - a.score);
+    const ranking = sorted.map((pl,i) => `${i===0?'🥇':i===1?'🥈':i===2?'🥉':'⭐'} ${pl.name}: ${pl.score}점`).join(' | ');
+    $('win-message').innerHTML = `${p.name}이(가) 모든 문장을 완성했어요!<br><br><strong>🏆 최종 점수</strong><br>${ranking}`;
     showModal('win-modal');
     createConfetti();
     playWinSound();
@@ -534,6 +551,20 @@ function createSparkles(element){
     document.body.appendChild(s);
     setTimeout(()=> s.remove(), 800);
   }
+}
+
+/* ========== FLOATING SCORE ========== */
+function showFloatingScore(element, points, isNew){
+  const rect = element.getBoundingClientRect();
+  const el = document.createElement('div');
+  el.className = 'floating-score' + (isNew ? ' bonus' : '');
+  el.textContent = `+${points}점`;
+  if(isNew) el.textContent += ' ✨NEW!';
+  el.style.left = (rect.left + rect.width/2) + 'px';
+  el.style.top = (rect.top) + 'px';
+  document.body.appendChild(el);
+  playTone(isNew ? 1047 : 784, .1, 'triangle');
+  setTimeout(()=> el.remove(), 1200);
 }
 
 /* ========== UTILS ========== */
