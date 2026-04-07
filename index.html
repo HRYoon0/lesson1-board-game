@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎲 Lesson 1 Board Game – I'm from ___</title>
+  <meta name="description" content="초등학교 5학년 영어 Lesson 1 보드게임 – I'm from 나라 이름 연습">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Jua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== SETUP SCREEN ===== -->
+<div id="setup-screen" class="screen active">
+  <div class="setup-container">
+    <div class="setup-title">
+      <span class="emoji-bounce">🎲</span>
+      <h1>Board Game</h1>
+      <h2>I'm from ___</h2>
+      <p class="subtitle">Lesson 1 · Play 3</p>
+    </div>
+    <div class="player-setup">
+      <h3>플레이어 수를 선택하세요</h3>
+      <div class="player-count-btns" id="count-btns">
+        <button class="count-btn active" data-count="2">2명</button>
+        <button class="count-btn" data-count="3">3명</button>
+        <button class="count-btn" data-count="4">4명</button>
+      </div>
+      <div id="player-names" class="player-names"></div>
+    </div>
+    <button id="start-btn" class="start-btn">🚀 게임 시작!</button>
+  </div>
+</div>
+
+<!-- ===== GAME SCREEN ===== -->
+<div id="game-screen" class="screen">
+  <header class="game-header">
+    <h1 class="game-title">🎲 I'm from ___</h1>
+    <div id="current-player" class="current-player"></div>
+    <button id="rules-btn" class="rules-btn" aria-label="Rules">❓</button>
+  </header>
+  <main class="game-main">
+    <div class="board-container">
+      <div id="game-board" class="game-board">
+        <!-- Squares injected by JS -->
+        <div class="center-area">
+          <div class="dice-section">
+            <div id="dice-visual" class="dice-visual">
+              <span class="dice-dot" data-pos="tl"></span>
+              <span class="dice-dot" data-pos="tc"></span>
+              <span class="dice-dot" data-pos="tr"></span>
+              <span class="dice-dot" data-pos="ml"></span>
+              <span class="dice-dot" data-pos="mc"></span>
+              <span class="dice-dot" data-pos="mr"></span>
+              <span class="dice-dot" data-pos="bl"></span>
+              <span class="dice-dot" data-pos="bc"></span>
+              <span class="dice-dot" data-pos="br"></span>
+            </div>
+            <button id="roll-btn" class="roll-btn">🎲 주사위 굴리기!</button>
+            <div id="dice-result-text" class="dice-result-text"></div>
+          </div>
+          <div class="sentence-checklist" id="sentence-checklist">
+            <h4>📝 체크리스트</h4>
+            <ul class="sentence-list" id="sentence-list"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="players-bar" class="players-bar"></div>
+  </main>
+</div>
+
+<!-- ===== EVENT MODAL ===== -->
+<div id="event-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div id="event-icon" class="event-icon"></div>
+    <h2 id="event-title" class="event-title"></h2>
+    <p id="event-subtitle" class="event-subtitle"></p>
+    <p id="event-sentence" class="event-sentence"></p>
+    <button id="event-speak-btn" class="speak-btn">🔊 들어보기</button><br>
+    <button id="event-close-btn" class="modal-close-btn">OK! ✓</button>
+  </div>
+</div>
+
+<!-- ===== ROLL AGAIN MODAL ===== -->
+<div id="rollAgain-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="event-icon">🎲</div>
+    <h2 class="event-title">한 번 더!</h2>
+    <p class="event-subtitle">Roll Again!</p>
+    <button id="rollAgain-close-btn" class="modal-close-btn">OK! 🎲</button>
+  </div>
+</div>
+
+<!-- ===== WIN MODAL ===== -->
+<div id="win-modal" class="modal-overlay">
+  <div class="modal-content win-modal">
+    <div class="confetti-container" id="confetti"></div>
+    <div class="event-icon">🏆</div>
+    <h2 id="win-title" class="event-title">축하합니다!</h2>
+    <p id="win-message" class="event-subtitle"></p>
+    <button id="restart-btn" class="modal-close-btn">🔄 다시 하기</button>
+  </div>
+</div>
+
+<!-- ===== RULES MODAL ===== -->
+<div id="rules-modal" class="modal-overlay">
+  <div class="modal-content rules-modal">
+    <h2>📖 게임 규칙</h2>
+    <div class="rules-content">
+      <p>1. 🎲 주사위를 굴려 나온 수만큼 이동해요.</p>
+      <p>2. 🇰🇷 나라 칸에 도착하면 영어 문장을 읽어봐요!</p>
+      <p>3. 👋 캐릭터 칸에 도착하면 소개 문장을 읽어봐요!</p>
+      <p>4. 🎲 "한 번 더 굴리기" 칸이면 한 번 더!</p>
+      <p>5. ✅ 6개 문장을 모두 체크하면 승리!</p>
+    </div>
+    <button id="rules-close-btn" class="modal-close-btn">알겠어요! 👍</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
