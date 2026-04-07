@@ -64,6 +64,7 @@ const curPlayerEl = $('current-player');
 
 /* ========== INIT ========== */
 document.addEventListener('DOMContentLoaded', () => {
+  createFloatingDecorations();
   renderNameInputs(2);
   /* count buttons */
   document.querySelectorAll('.count-btn').forEach(btn => {
@@ -72,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       playerCount = +btn.dataset.count;
       renderNameInputs(playerCount);
+      playTone(500,.08,'triangle');
     });
   });
   $('start-btn').addEventListener('click', startGame);
@@ -260,21 +262,24 @@ function onRoll(){
 
 function animateDice(final, cb){
   let count = 0;
-  const total = 12;
+  const total = 14;
   diceVisual.classList.add('shaking');
   const iv = setInterval(()=>{
     const v = Math.floor(Math.random()*6)+1;
     showDiceFace(v);
-    playTone(300 + v*80, .06);
+    playTone(300 + v*80, .05);
     count++;
     if(count >= total){
       clearInterval(iv);
       diceVisual.classList.remove('shaking');
+      diceVisual.classList.add('result-bounce');
+      setTimeout(()=> diceVisual.classList.remove('result-bounce'), 500);
       showDiceFace(final);
-      playTone(600, .15, 'triangle');
-      setTimeout(cb, 350);
+      playTone(523,.1,'triangle');
+      setTimeout(()=> playTone(784,.15,'triangle'), 100);
+      setTimeout(cb, 450);
     }
-  }, 80);
+  }, 70);
 }
 
 function showDiceFace(v){
@@ -295,8 +300,11 @@ async function movePlayer(p, steps){
     p.tokenEl.classList.add('pop');
     highlightSquare(p.pos);
     playTone(400 + i*60, .05);
-    await wait(250);
+    await wait(220);
   }
+  /* sparkle on landing */
+  const landedSq = board.querySelector(`.square[data-index="${p.pos}"]`);
+  if(landedSq) createSparkles(landedSq);
   await wait(200);
   handleLanding(p);
 }
@@ -336,9 +344,7 @@ function showEventModal(sq, p){
     refreshChecklist();
     refreshBar();
   }
-  playTone(523,.1,'triangle');
-  setTimeout(()=>playTone(659,.1,'triangle'),120);
-  setTimeout(()=>playTone(784,.15,'triangle'),240);
+  playMelody([523,659,784], .1, 100);
 }
 
 function onEventClose(){
@@ -385,7 +391,7 @@ function playTone(freq, dur, type='sine'){
     const g = audioCtx.createGain();
     o.type = type;
     o.frequency.value = freq;
-    g.gain.value = 0.18;
+    g.gain.value = 0.15;
     o.connect(g);
     g.connect(audioCtx.destination);
     o.start();
@@ -394,9 +400,12 @@ function playTone(freq, dur, type='sine'){
   } catch(e){}
 }
 
+function playMelody(notes, dur, gap){
+  notes.forEach((n,i) => setTimeout(()=> playTone(n, dur, 'triangle'), i*gap));
+}
+
 function playWinSound(){
-  const notes = [523,659,784,1047];
-  notes.forEach((n,i) => setTimeout(()=> playTone(n,.25,'triangle'), i*200));
+  playMelody([523,659,784,1047,784,1047], .2, 150);
 }
 
 /* ========== TTS ========== */
@@ -438,18 +447,54 @@ function speak(text){
 function createConfetti(){
   const c = $('confetti');
   c.innerHTML = '';
-  const colors = ['#F44336','#2196F3','#4CAF50','#FF9800','#9C27B0','#00BCD4','#FFEB3B','#E91E63'];
-  for(let i=0;i<80;i++){
+  const colors = ['#FF6B6B','#54a0ff','#5f27cd','#ffa502','#2ed573','#ff6348','#eccc68','#ff4757','#7bed9f','#70a1ff'];
+  const shapes = ['circle','rect','star'];
+  for(let i=0;i<120;i++){
     const p = document.createElement('div');
-    p.className = 'confetti-piece';
+    const shape = shapes[Math.floor(Math.random()*shapes.length)];
+    p.className = `confetti-piece ${shape}`;
     p.style.left = Math.random()*100+'%';
     p.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-    p.style.animationDelay = Math.random()*2.5+'s';
-    p.style.animationDuration = (2+Math.random()*2)+'s';
-    p.style.width = (6+Math.random()*8)+'px';
-    p.style.height = (6+Math.random()*8)+'px';
-    p.style.borderRadius = Math.random()>.5?'50%':'2px';
+    p.style.animationDelay = Math.random()*3+'s';
+    p.style.animationDuration = (2.5+Math.random()*2.5)+'s';
+    p.style.width = (6+Math.random()*10)+'px';
+    p.style.height = (6+Math.random()*10)+'px';
     c.appendChild(p);
+  }
+}
+
+/* ========== FLOATING DECORATIONS ========== */
+function createFloatingDecorations(){
+  const container = $('floating-deco');
+  if(!container) return;
+  const emojis = ['⭐','✨','🌈','☁️','🎈','💫','🌟','🎵','❤️','🦋','🌸','🍀'];
+  for(let i=0;i<18;i++){
+    const el = document.createElement('span');
+    el.className = 'float-emoji';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = Math.random()*100+'%';
+    el.style.fontSize = (1.2+Math.random()*1.8)+'rem';
+    el.style.animationDuration = (10+Math.random()*15)+'s';
+    el.style.animationDelay = Math.random()*12+'s';
+    container.appendChild(el);
+  }
+}
+
+/* ========== SPARKLE EFFECT ========== */
+function createSparkles(element){
+  const rect = element.getBoundingClientRect();
+  const colors = ['#FFD700','#FF6B6B','#54a0ff','#2ed573','#ff4757','#eccc68'];
+  for(let i=0;i<10;i++){
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.left = (rect.left + rect.width/2 + (Math.random()-0.5)*60)+'px';
+    s.style.top = (rect.top + rect.height/2 + (Math.random()-0.5)*60)+'px';
+    s.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+    s.style.width = s.style.height = (4+Math.random()*8)+'px';
+    s.style.setProperty('--tx', (Math.random()-0.5)*80+'px');
+    s.style.setProperty('--ty', (Math.random()-0.5)*80+'px');
+    document.body.appendChild(s);
+    setTimeout(()=> s.remove(), 800);
   }
 }
 
