@@ -82,11 +82,11 @@
     <p id="event-subtitle" class="event-subtitle"></p>
     <div class="conversation-area">
       <div class="speech-bubble question-bubble">
-        <span class="bubble-label">🗣️ Question</span>
-        <p class="bubble-text">Where are you from?</p>
+        <span class="bubble-label" id="q-label">🗣️ Question</span>
+        <p id="event-question" class="bubble-text">Where are you from?</p>
       </div>
       <div class="speech-bubble answer-bubble">
-        <span class="bubble-label">💬 Answer</span>
+        <span class="bubble-label" id="a-label">💬 Answer</span>
         <p id="event-sentence" class="bubble-text"></p>
       </div>
     </div>
@@ -122,10 +122,11 @@
     <h2>📖 게임 규칙</h2>
     <div class="rules-content">
       <p>1. 🎲 주사위를 굴려 나온 수만큼 이동해요.</p>
-      <p>2. 🇰🇷 나라 칸에 도착하면 영어 문장을 읽어봐요!</p>
-      <p>3. 👋 캐릭터 칸에 도착하면 소개 문장을 읽어봐요!</p>
-      <p>4. 🎲 "한 번 더 굴리기" 칸이면 한 번 더!</p>
-      <p>5. ✅ 6개 문장을 모두 체크하면 승리!</p>
+      <p>2. 🇰🇷 나라 칸: "Where are you from?" → "I'm from ___."</p>
+      <p>3. 👋 캐릭터 칸: 캐릭터가 어디서 왔는지 말해봐요!</p>
+      <p>4. 👨‍👩‍👧‍👦 가족 칸: "This is my ___." → "Nice to meet you."</p>
+      <p>5. 🎲 "한 번 더 굴리기" 칸이면 한 번 더!</p>
+      <p>6. ✅ 10개 문장을 모두 체크하면 승리!</p>
     </div>
     <button id="rules-close-btn" class="modal-close-btn">알겠어요! 👍</button>
   </div>

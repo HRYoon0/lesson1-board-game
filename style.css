@@ -11,6 +11,8 @@
   --country-to: #0984e3;
   --character-from: #55efc4;
   --character-to: #00b894;
+  --family-from: #f8a5c2;
+  --family-to: #c44569;
   --roll-from: #fdcb6e;
   --roll-to: #e17055;
   --start-from: #fd79a8;
@@ -133,7 +135,7 @@ body{font-family:var(--font-en);background:linear-gradient(-45deg,var(--bg-start
 /* ===== BOARD ===== */
 .board-container{width:100%;max-width:780px;aspect-ratio:1;position:relative}
 .game-board{
-  display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);
+  display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);
   gap:7px;width:100%;height:100%;
   background:linear-gradient(145deg,#FFF9F0,#FFF0F5);
   border-radius:24px;padding:8px;
@@ -167,6 +169,7 @@ body{font-family:var(--font-en);background:linear-gradient(-45deg,var(--bg-start
 .square .sq-sublabel{font-size:.8rem;color:rgba(255,255,255,.9);line-height:1}
 .square.country{background:linear-gradient(145deg,var(--country-from),var(--country-to))}
 .square.character{background:linear-gradient(145deg,var(--character-from),var(--character-to))}
+.square.family{background:linear-gradient(145deg,var(--family-from),var(--family-to))}
 .square.rollAgain{background:linear-gradient(145deg,var(--roll-from),var(--roll-to));animation:wobbleIdle 3s ease-in-out infinite}
 @keyframes wobbleIdle{0%,100%{transform:rotate(0)}25%{transform:rotate(1.5deg)}75%{transform:rotate(-1.5deg)}}
 .square.start{background:linear-gradient(145deg,var(--start-from),var(--start-to))}
@@ -184,7 +187,7 @@ body{font-family:var(--font-en);background:linear-gradient(-45deg,var(--bg-start
 
 /* ===== CENTER AREA ===== */
 .center-area{
-  grid-row:2/5;grid-column:2/5;
+  grid-row:2/6;grid-column:2/6;
   background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(248,240,255,.9));
   border-radius:20px;display:flex;flex-direction:column;
   align-items:center;justify-content:center;

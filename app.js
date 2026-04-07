@@ -1,37 +1,45 @@
 /* ========== CONSTANTS ========== */
 const BOARD = [
-  { id:0,  type:'start',     icon:'🚀', label:'출발',         sublabel:'START' },
-  { id:1,  type:'country',   icon:'🇰🇷', label:'Korea',       sentence:"I'm from Korea.",      sentenceIdx:0 },
-  { id:2,  type:'country',   icon:'🇺🇸', label:'U.S.',        sentence:"I'm from the U.S.",    sentenceIdx:1 },
-  { id:3,  type:'country',   icon:'🇫🇷', label:'France',      sentence:"I'm from France.",     sentenceIdx:5 },
-  { id:4,  type:'character', icon:'👦🏽', label:'Ken',         sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2 },
-  { id:5,  type:'country',   icon:'🇮🇳', label:'India',       sentence:"I'm from India.",      sentenceIdx:2 },
-  { id:6,  type:'rollAgain', icon:'🎲', label:'한 번 더!',    sublabel:'Roll Again' },
-  { id:7,  type:'country',   icon:'🇻🇳', label:'Vietnam',     sentence:"I'm from Vietnam.",    sentenceIdx:4 },
-  { id:8,  type:'country',   icon:'🇨🇦', label:'Canada',      sentence:"I'm from Canada.",     sentenceIdx:3 },
-  { id:9,  type:'country',   icon:'🇰🇷', label:'Korea',       sentence:"I'm from Korea.",      sentenceIdx:0 },
-  { id:10, type:'rollAgain', icon:'🎲', label:'한 번 더!',    sublabel:'Roll Again' },
-  { id:11, type:'character', icon:'👦🏾', label:'Rahul',       sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2 },
-  { id:12, type:'rollAgain', icon:'🎲', label:'한 번 더!',    sublabel:'Roll Again' },
-  { id:13, type:'character', icon:'👩🏻‍🏫', label:'Ms. Green',   sublabel:'teacher', country:'the U.S.',sentence:"I'm from the U.S.", sentenceIdx:1 },
-  { id:14, type:'character', icon:'👧🏻', label:'Marie',       sublabel:'cousin',  country:'France',  sentence:"I'm from France.",  sentenceIdx:5 },
-  { id:15, type:'country',   icon:'🇫🇷', label:'France',      sentence:"I'm from France.",     sentenceIdx:5 },
+  { id:0,  type:'start',     icon:'🚀', label:'출발',       sublabel:'START' },
+  { id:1,  type:'country',   icon:'🇰🇷', label:'Korea',     sentence:"I'm from Korea.",      sentenceIdx:0 },
+  { id:2,  type:'family',    icon:'👨', label:'Dad',       sublabel:'가족',  sentence:"This is my dad.",      sentenceIdx:6 },
+  { id:3,  type:'country',   icon:'🇺🇸', label:'U.S.',      sentence:"I'm from the U.S.",    sentenceIdx:1 },
+  { id:4,  type:'country',   icon:'🇫🇷', label:'France',    sentence:"I'm from France.",     sentenceIdx:5 },
+  { id:5,  type:'character', icon:'👦🏽', label:'Ken',       sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2 },
+  { id:6,  type:'family',    icon:'👩', label:'Mom',       sublabel:'가족',  sentence:"This is my mom.",      sentenceIdx:7 },
+  { id:7,  type:'country',   icon:'🇮🇳', label:'India',     sentence:"I'm from India.",      sentenceIdx:2 },
+  { id:8,  type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again' },
+  { id:9,  type:'country',   icon:'🇻🇳', label:'Vietnam',   sentence:"I'm from Vietnam.",    sentenceIdx:4 },
+  { id:10, type:'country',   icon:'🇺🇸', label:'U.S.',      sentence:"I'm from the U.S.",    sentenceIdx:1 },
+  { id:11, type:'family',    icon:'👦', label:'Brother',   sublabel:'가족',  sentence:"This is my brother.",  sentenceIdx:8 },
+  { id:12, type:'country',   icon:'🇨🇦', label:'Canada',    sentence:"I'm from Canada.",     sentenceIdx:3 },
+  { id:13, type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again' },
+  { id:14, type:'character', icon:'👦🏾', label:'Rahul',     sublabel:'friend',  country:'India',   sentence:"I'm from India.",   sentenceIdx:2 },
+  { id:15, type:'country',   icon:'🇰🇷', label:'Korea',     sentence:"I'm from Korea.",      sentenceIdx:0 },
+  { id:16, type:'rollAgain', icon:'🎲', label:'한 번 더!',  sublabel:'Roll Again' },
+  { id:17, type:'character', icon:'👩🏻‍🏫', label:'Ms. Green', sublabel:'teacher', country:'the U.S.', sentence:"I'm from the U.S.", sentenceIdx:1 },
+  { id:18, type:'family',    icon:'👧', label:'Sister',    sublabel:'가족',  sentence:"This is my sister.",   sentenceIdx:9 },
+  { id:19, type:'character', icon:'👧🏻', label:'Marie',     sublabel:'cousin',  country:'France',  sentence:"I'm from France.",  sentenceIdx:5 },
 ];
 
 const GRID_POS = [
-  {r:1,c:1},{r:1,c:2},{r:1,c:3},{r:1,c:4},{r:1,c:5},  // 0-4
-  {r:2,c:5},{r:3,c:5},{r:4,c:5},                        // 5-7
-  {r:5,c:5},{r:5,c:4},{r:5,c:3},{r:5,c:2},{r:5,c:1},    // 8-12
-  {r:4,c:1},{r:3,c:1},{r:2,c:1},                         // 13-15
+  {r:1,c:1},{r:1,c:2},{r:1,c:3},{r:1,c:4},{r:1,c:5},{r:1,c:6},  // 0-5  top
+  {r:2,c:6},{r:3,c:6},{r:4,c:6},{r:5,c:6},                        // 6-9  right
+  {r:6,c:6},{r:6,c:5},{r:6,c:4},{r:6,c:3},{r:6,c:2},{r:6,c:1},    // 10-15 bottom
+  {r:5,c:1},{r:4,c:1},{r:3,c:1},{r:2,c:1},                        // 16-19 left
 ];
 
 const SENTENCES = [
-  { id:0, text:"I'm from Korea.",   flag:'🇰🇷' },
-  { id:1, text:"I'm from the U.S.", flag:'🇺🇸' },
-  { id:2, text:"I'm from India.",   flag:'🇮🇳' },
-  { id:3, text:"I'm from Canada.",  flag:'🇨🇦' },
-  { id:4, text:"I'm from Vietnam.", flag:'🇻🇳' },
-  { id:5, text:"I'm from France.",  flag:'🇫🇷' },
+  { id:0, text:"I'm from Korea.",       flag:'🇰🇷' },
+  { id:1, text:"I'm from the U.S.",     flag:'🇺🇸' },
+  { id:2, text:"I'm from India.",       flag:'🇮🇳' },
+  { id:3, text:"I'm from Canada.",      flag:'🇨🇦' },
+  { id:4, text:"I'm from Vietnam.",     flag:'🇻🇳' },
+  { id:5, text:"I'm from France.",      flag:'🇫🇷' },
+  { id:6, text:"This is my dad.",       flag:'👨' },
+  { id:7, text:"This is my mom.",       flag:'👩' },
+  { id:8, text:"This is my brother.",   flag:'👦' },
+  { id:9, text:"This is my sister.",    flag:'👧' },
 ];
 
 const PCOLORS = ['#F44336','#2196F3','#4CAF50','#FF9800'];
@@ -82,8 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $('rules-close-btn').addEventListener('click', ()=> hideModal('rules-modal'));
   $('event-close-btn').addEventListener('click', onEventClose);
   $('event-speak-btn').addEventListener('click', ()=>{
+    const question = $('event-question').textContent;
     const answer = $('event-sentence').textContent;
-    speakConversation('Where are you from?', answer);
+    speakConversation(question, answer);
   });
   $('rollAgain-close-btn').addEventListener('click', ()=>{
     hideModal('rollAgain-modal');
@@ -206,8 +215,8 @@ function buildPlayersBar(){
     card.innerHTML = `<div class="p-dot" style="background:${p.color}"></div>
       <div class="p-info">
         <span class="p-name">${p.name}</span>
-        <span class="p-progress">${p.checked.size}/6</span>
-        <div class="progress-bar"><div class="progress-fill" style="width:${(p.checked.size/6)*100}%"></div></div>
+        <span class="p-progress">${p.checked.size}/10</span>
+        <div class="progress-bar"><div class="progress-fill" style="width:${(p.checked.size/10)*100}%"></div></div>
       </div>`;
     playersBar.appendChild(card);
   });
@@ -218,8 +227,8 @@ function refreshBar(){
   players.forEach(p => {
     const card = $(`pcard-${p.idx}`);
     if(!card) return;
-    card.querySelector('.p-progress').textContent = `${p.checked.size}/6`;
-    card.querySelector('.progress-fill').style.width = `${(p.checked.size/6)*100}%`;
+    card.querySelector('.p-progress').textContent = `${p.checked.size}/10`;
+    card.querySelector('.progress-fill').style.width = `${(p.checked.size/10)*100}%`;
   });
   highlightCard();
 }
@@ -311,7 +320,7 @@ async function movePlayer(p, steps){
 
 function handleLanding(p){
   const sq = BOARD[p.pos];
-  if(sq.type === 'country' || sq.type === 'character'){
+  if(sq.type === 'country' || sq.type === 'character' || sq.type === 'family'){
     showEventModal(sq, p);
   } else if(sq.type === 'rollAgain'){
     showModal('rollAgain-modal');
@@ -329,16 +338,26 @@ let pendingRollAgain = false;
 
 function showEventModal(sq, p){
   const isChar = sq.type === 'character';
+  const isFamily = sq.type === 'family';
   $('event-icon').textContent = sq.icon;
-  $('event-title').textContent = isChar
-    ? `${sq.sublabel}, ${sq.label}`
-    : sq.label;
-  $('event-subtitle').textContent = isChar
-    ? `"Hi, I'm ${sq.label}!"`
-    : '';
-  $('event-sentence').textContent = sq.sentence;
+
+  if(isFamily){
+    $('event-title').textContent = sq.label;
+    $('event-subtitle').textContent = '';
+    $('q-label').textContent = '👋 소개해요';
+    $('event-question').textContent = sq.sentence;
+    $('a-label').textContent = '😊 인사해요';
+    $('event-sentence').textContent = 'Nice to meet you.';
+  } else {
+    $('event-title').textContent = isChar ? `${sq.sublabel}, ${sq.label}` : sq.label;
+    $('event-subtitle').textContent = isChar ? `"Hi, I'm ${sq.label}!"` : '';
+    $('q-label').textContent = '🗣️ Question';
+    $('event-question').textContent = 'Where are you from?';
+    $('a-label').textContent = '💬 Answer';
+    $('event-sentence').textContent = sq.sentence;
+  }
+
   showModal('event-modal');
-  /* check sentence */
   if(sq.sentenceIdx !== undefined){
     p.checked.add(sq.sentenceIdx);
     refreshChecklist();
@@ -356,7 +375,7 @@ function onEventClose(){
 
 /* ========== WIN ========== */
 function checkWin(p){
-  if(p.checked.size >= 6){
+  if(p.checked.size >= 10){
     gameOver = true;
     $('win-title').textContent = '🎉 축하합니다!';
     $('win-message').textContent = `${p.name}이(가) 모든 문장을 완성했어요!`;
