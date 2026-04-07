@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
   $('rules-close-btn').addEventListener('click', ()=> hideModal('rules-modal'));
   $('event-close-btn').addEventListener('click', onEventClose);
   $('event-speak-btn').addEventListener('click', ()=>{
-    const txt = $('event-sentence').textContent;
-    speak(txt);
+    const answer = $('event-sentence').textContent;
+    speakConversation('Where are you from?', answer);
   });
   $('rollAgain-close-btn').addEventListener('click', ()=>{
     hideModal('rollAgain-modal');
@@ -431,16 +431,35 @@ if(window.speechSynthesis){
   speechSynthesis.onvoiceschanged = loadVoices;
 }
 
-function speak(text){
+function speak(text, cb){
   if(!window.speechSynthesis) return;
-  speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'en-US';
-  u.rate = 0.75;   /* slower for kids */
-  u.pitch = 1.1;   /* slightly higher, friendlier tone */
+  u.rate = 0.75;
+  u.pitch = 1.1;
   u.volume = 1.0;
   if(bestVoice) u.voice = bestVoice;
+  if(cb) u.onend = cb;
   speechSynthesis.speak(u);
+}
+
+function speakConversation(question, answer){
+  if(!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  /* highlight question bubble */
+  const qBubble = document.querySelector('.question-bubble');
+  const aBubble = document.querySelector('.answer-bubble');
+  if(qBubble) qBubble.style.boxShadow = '0 0 15px rgba(84,160,255,.4)';
+  speak(question, ()=>{
+    if(qBubble) qBubble.style.boxShadow = '';
+    /* pause between Q and A */
+    setTimeout(()=>{
+      if(aBubble) aBubble.style.boxShadow = '0 0 15px rgba(124,107,255,.4)';
+      speak(answer, ()=>{
+        if(aBubble) aBubble.style.boxShadow = '';
+      });
+    }, 400);
+  });
 }
 
 /* ========== CONFETTI ========== */

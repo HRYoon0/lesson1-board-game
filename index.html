@@ -80,8 +80,17 @@
     <div id="event-icon" class="event-icon"></div>
     <h2 id="event-title" class="event-title"></h2>
     <p id="event-subtitle" class="event-subtitle"></p>
-    <p id="event-sentence" class="event-sentence"></p>
-    <button id="event-speak-btn" class="speak-btn">🔊 들어보기</button><br>
+    <div class="conversation-area">
+      <div class="speech-bubble question-bubble">
+        <span class="bubble-label">🗣️ Question</span>
+        <p class="bubble-text">Where are you from?</p>
+      </div>
+      <div class="speech-bubble answer-bubble">
+        <span class="bubble-label">💬 Answer</span>
+        <p id="event-sentence" class="bubble-text"></p>
+      </div>
+    </div>
+    <button id="event-speak-btn" class="speak-btn">🔊 대화 들어보기</button><br>
     <button id="event-close-btn" class="modal-close-btn">OK! ✓</button>
   </div>
 </div>
